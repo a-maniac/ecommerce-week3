@@ -21,6 +21,7 @@ public class ProductService {
 
 
     public List<ProductDto> getAllInventory(){
+        log.info("Fetching all inventory data");
         List<Product> inventories= productRepository.findAll();
         return inventories.stream()
                 .map(product -> modelMapper.map(product,ProductDto.class))
@@ -28,6 +29,7 @@ public class ProductService {
     }
 
     public ProductDto getProductById(Long id){
+        log.info("Fetching product with id :{}",id);
         Optional<Product> inventory=productRepository.findById(id);
         return inventory.map(item->modelMapper.map(inventory,ProductDto.class))
                 .orElseThrow(()-> new RuntimeException("Product Not Found"));
